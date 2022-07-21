@@ -1,0 +1,45 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: ingress-scaler
+spec:
+  scaleTargetRef:
+    apiVersion: operator.openshift.io/v1
+    kind: IngressController
+    name: default
+    envSourceContainerName: ingress-operator
+  minReplicaCount: 2
+  maxReplicaCount: 7
+  cooldownPeriod: 1
+  pollingInterval: 1
+  fallback:
+    failureThreshold: 3
+    replicas: 2
+  advanced:            # Optional. Section to specify advanced options
+    restoreToOriginalReplicaCount: true
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 3
+          policies:
+          - type: Percent
+            value: 100
+            periodSeconds: 1
+        scaleUp:
+          stabilizationWindowSeconds: 3
+          policies:
+          - type: Percent
+            value: 100
+            periodSeconds: 1
+  triggers:
+  - type: prometheus
+    metricType: AverageValue
+    metadata:
+      serverAddress: https://thanos-querier.openshift-monitoring.svc.cluster.local:9091
+      namespace: openshift-ingress-operator
+      metricName: 'nodes-ready'
+      threshold: '1'
+      query: 'avg_over_time(nodes_ready{service="nodes-ready-app"}[1m])'
+      authModes: "bearer"
+    authenticationRef:
+      name: keda-trigger-auth-prometheus
