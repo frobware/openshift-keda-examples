@@ -20,8 +20,6 @@ This repo is an example of:
     $ git clone https://github.com/frobware/openshift-keda-examples && cd openshift-keda-examples
 ```
 
-2. Create and switch to a new namespace
-
 Do all operations in the openshift-ingress-operator namespace:
 
 ```sh
