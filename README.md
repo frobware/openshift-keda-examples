@@ -38,7 +38,7 @@ convenience; let's go through all the steps explicitly:
 
 In the OperatorHub locate and install Cluster Metrics Adapter.
 
-![CLuster Metrics Adapter](screenshots/cluster-metrics-adapter?raw=true "Cluster Metrics Adapter")
+![CLuster Metrics Adapter](screenshots/cluster-metrics-adapter.png?raw=true "Cluster Metrics Adapter")
 
 Once the operator is installed also create a `KedaController`. The
 documentation in the OperatorHub offers a 1-click option to do this
