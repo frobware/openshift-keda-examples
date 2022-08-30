@@ -2,7 +2,7 @@
 
 This repo is an example of:
 
-- Installing OpenShift Custom Metrics Autoscaler operator on your cluster
+- Installing OpenShift [Custom Metrics Autoscaler](https://cloud.redhat.com/blog/custom-metrics-autoscaler-on-openshift) operator on your cluster
 - Creating Custom Metrics Autoscaler resources (triggerauthentication, scaledobject, etc)
 - Scaling the default ingresscontroller based on the number of nodes
 
