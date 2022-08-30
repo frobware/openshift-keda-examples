@@ -38,11 +38,13 @@ convenience; let's go through all the steps explicitly:
 
 In the OperatorHub locate and install Custom Metrics Autoscaler.
 
-![CLuster Metrics Adapter](screenshots/cluster-metrics-adapter.png?raw=true "Custom Metrics Autoscaler")
+![Custom Metrics Adapter](screenshots/custom-metrics-adapter.png?raw=true "Custom Metrics Autoscaler")
 
-Once the operator is installed also create a `KedaController`. The
-documentation in the OperatorHub offers a 1-click option to do this
-once the operator is running.
+Once the operator is installed also create a `KedaController`
+instance. The documentation in the OperatorHub offers a 1-click option
+to do this once the operator is running.
+
+![Create KEDA controller instance](screenshots/create-keda-controller-instance.png?raw=true "Create KEDA controller instance")
 
 A functioning Custom Metrics Autoscaler setup will have 3 pods
 running:
