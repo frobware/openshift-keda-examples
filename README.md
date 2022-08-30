@@ -1,9 +1,9 @@
-# Scale OpenShift ingresscontroller using Cluster Metrics Adapter (KEDA)
+# Scale OpenShift ingresscontroller using Cluster Metrics Autoscaler (KEDA)
 
 This repo is an example of:
 
-- Installing OpenShift Cluster Metrics Adapter operator on your cluster
-- Creating Cluster Metrics Adapter resources (triggerauthentication, scaledobject, etc)
+- Installing OpenShift Cluster Metrics Autoscaler operator on your cluster
+- Creating Cluster Metrics Autoscaler resources (triggerauthentication, scaledobject, etc)
 - Scaling the default ingresscontroller based on the number of nodes
 
 ## Useful links / prior work
@@ -26,7 +26,7 @@ Do all operations in the openshift-ingress-operator namespace:
     $ oc project openshift-ingress-operator
 ```
 
-# Installing Cluster Metrics Adapter
+# Installing Cluster Metrics Autoscaler
 
 This [existing
 demo](https://github.com/zroubalik/keda-openshift-examples/tree/main/prometheus/ocp-monitoring)
@@ -34,17 +34,18 @@ details the steps that need to be run which I have encapsulated in the
 following [setup/script](./setup/setup.sh). The setup script is for
 convenience; let's go through all the steps explicitly:
 
-1. Install Cluster Metrics Adapter from OperatorHub
+1. Install Cluster Metrics Autoscaler from OperatorHub
 
-In the OperatorHub locate and install Cluster Metrics Adapter.
+In the OperatorHub locate and install Cluster Metrics Autoscaler.
 
-![CLuster Metrics Adapter](screenshots/cluster-metrics-adapter.png?raw=true "Cluster Metrics Adapter")
+![CLuster Metrics Adapter](screenshots/cluster-metrics-adapter.png?raw=true "Cluster Metrics Autoscaler")
 
 Once the operator is installed also create a `KedaController`. The
 documentation in the OperatorHub offers a 1-click option to do this
 once the operator is running.
 
-A functioning Cluster Metrics Adapter setup will have 3 pods running:
+A functioning Cluster Metrics Autoscaler setup will have 3 pods
+running:
 
 ```sh
     $ oc get pods -n keda
