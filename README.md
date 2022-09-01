@@ -50,11 +50,11 @@ A functioning Custom Metrics Autoscaler setup will have 3 pods
 running:
 
 ```sh
-$ oc get pods -n keda
-NAME                                     READY   STATUS    RESTARTS   AGE
-keda-metrics-apiserver-f57cbb4b5-qtlrt   1/1     Running   0          3d3h
-keda-olm-operator-86f7c55bdd-2zxlj       1/1     Running   0          3d3h
-keda-operator-78b964d4cd-p8mbl           1/1     Running   0          3d3h
+% oc get pods -n openshift-keda
+NAME                                                  READY   STATUS    RESTARTS   AGE
+custom-metrics-autoscaler-operator-5b865f6b96-p2jqw   1/1     Running   0          20h
+keda-metrics-apiserver-7bb57b45b9-vxvmt               1/1     Running   0          20h
+keda-operator-bd446d79c-skxjk                         1/1     Running   0          20h
 ```
 
 2. Enable OpenShift monitoring for user-defined projects
