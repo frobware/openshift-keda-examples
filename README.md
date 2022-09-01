@@ -159,17 +159,26 @@ EOF
 
 ```sh
     $ oc adm policy add-role-to-user thanos-metrics-reader -z thanos --role-namespace=openshift-ingress-operator
+    $ oc adm policy -n openshift-ingress-operator add-cluster-role-to-user cluster-monitoring-view -z thanos
 ```
 
-**THE FOLLOWING STEP IS VERY IMPORTANT**: 
+The previous `add-cluster-role-to-user` step is only required if you
+use cross-namespace queries (which our examples will do); if you are
+running through the steps in this README then you will need to run the
+`add-cluster-role-to-user` step.
 
-If you are using cross-namespace queries (which we will be using) you
-need to target port 9091 (and not port 9092) in your scaledobject
-`serverAddress` then you will also need elevated privileges to read
-metrics from port 9091 which can be granted with:
+Our scaledobject examples, which all run in the
+`openshift-ingress-operator` namespace, use a metric from the
+`kube-metrics` namespace (i.e., cross-namespace). 
 
-```sh
-    $ oc adm policy -n openshift-ingress-operator add-cluster-role-to-user cluster-monitoring-view -z thanos
+If you don't run both the `oc adm policy` steps above then the
+scaledobject will remain in a non-active state due to lack of
+permissions:
+
+```
+    $ oc get scaledobject
+    NAME             SCALETARGETKIND                              SCALETARGETNAME   MIN   MAX   TRIGGERS     AUTHENTICATION                 READY   ACTIVE   FALLBACK   AGE
+    ingress-scaler   operator.openshift.io/v1.IngressController   default           1     20    prometheus   keda-trigger-auth-prometheus   True    False    True       99s
 ```
 
 # Autoscaling deployments
