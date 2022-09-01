@@ -161,10 +161,12 @@ EOF
     $ oc adm policy add-role-to-user thanos-metrics-reader -z thanos --role-namespace=openshift-ingress-operator
 ```
 
-**VERY IMPORTANT**: if you are using cross-namespace queries you need
-to target port 9091 (and not port 9092) in your scaledobject
+**THE FOLLOWING STEP IS VERY IMPORTANT**: 
+
+If you are using cross-namespace queries (which we will be using) you
+need to target port 9091 (and not port 9092) in your scaledobject
 `serverAddress` then you will also need elevated privileges to read
-metrics from port 9091:
+metrics from port 9091 which can be granted with:
 
 ```sh
     $ oc adm policy -n openshift-ingress-operator add-cluster-role-to-user cluster-monitoring-view -z thanos
