@@ -14,15 +14,13 @@ This repo is an example of:
 
 ## Prerequisites
 
-1. Clone this repo
-
 ```sh
 $ git clone https://github.com/frobware/openshift-keda-examples && cd openshift-keda-examples
 ```
 
 # Autoscaling the default ingress controller
 
-1. Install Custom Metrics Autoscaler from OperatorHub
+## Install Custom Metrics Autoscaler from OperatorHub
 
 In the OperatorHub locate and install Custom Metrics Autoscaler.
 
@@ -45,13 +43,13 @@ keda-metrics-apiserver-7bb57b45b9-vxvmt               1/1     Running   0       
 keda-operator-bd446d79c-skxjk                         1/1     Running   0          20h
 ```
 
-1. Do all operations in the openshift-ingress-operator namespace:
+## Do all operations in the openshift-ingress-operator namespace:
 
 ```sh
 $ oc project openshift-ingress-operator
 ```
 
-3. Enable OpenShift monitoring for user-defined projects
+## Enable OpenShift monitoring for user-defined projects
 
 Please refer to the
 [documentation](https://docs.openshift.com/container-platform/4.9/monitoring/enabling-monitoring-for-user-defined-projects.html),
@@ -70,7 +68,7 @@ data:
 EOF
 ```
 
-1. Create a Service Account
+## Create a Service Account
 
 You need a Service Account to authenticate with Thanos:
 
@@ -87,7 +85,7 @@ Tokens:              thanos-token-c422q
 Events:              <none>
 ```
 
-1. Define a TriggerAuthentication with the Service Account's token
+## Define a TriggerAuthentication with the Service Account's token
 
 ```sh
 $ secret=$(oc get secret | grep thanos-token | head -n 1 | awk '{ print $1 }')
@@ -115,7 +113,7 @@ objects:
 EOF
 ```
 
-1. Create a role for reading metrics from Thanos
+## Create a role for reading metrics from Thanos
 
 ```sh
 $ oc apply -f - <<EOF
@@ -149,7 +147,7 @@ rules:
 EOF
 ```
 
-1. Add the role for reading metrics from Thanos to the Service Account
+## Add the role for reading metrics from Thanos to the Service Account
 
 ```sh
 $ oc adm policy add-role-to-user thanos-metrics-reader -z thanos --role-namespace=openshift-ingress-operator
@@ -175,7 +173,7 @@ permissions:
     ingress-scaler   operator.openshift.io/v1.IngressController   default           1     20    prometheus   keda-trigger-auth-prometheus   True    False    True       99s
 ```
 
-1. Create a scaledobject for scaling the default ingresscontroller
+## Create a scaledobject for scaling the default ingresscontroller
 
 First let's verify how many replicas we currently have for the
 `default` ingresscontroller; We are expecting 2:
