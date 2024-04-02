@@ -3,7 +3,7 @@ IMAGE_TAG ?= amcdermo/nodes-ready-app
 export GOPROXY=https://proxy.golang.org,direct
 
 build:
-	CGO_ENABLED=0 go build -o nodes-ready-app .
+	CGO_ENABLED=0 go build -mod=vendor -o nodes-ready-app .
 
 image: fmt vet build
 	$(RM) nodes-ready-app
